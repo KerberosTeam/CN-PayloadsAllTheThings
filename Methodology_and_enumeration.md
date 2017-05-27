@@ -1,21 +1,21 @@
-# Bug Hunting Methodology and Enumeration
+# 寻找漏洞的方法和列表
 
-## Enumerate all subdomains (only if the scope is *.domain.ext)
+## 枚举所有子域名 (只针对*.domain.ext有效)
 
-* Using Subbrute
+* 使用子域名爆破
 ```bash
 git clone https://github.com/TheRook/subbrute
 python subbrute.py domain.example.com
 ```
 
-* Using KnockPy with Daniel Miessler’s SecLists for subdomain "/Discover/DNS"
+* 使用带有Daniel Miessler的SecLists（"/Discover/DNS"子域名）的KnockPy 
 ```bash
 git clone https://github.com/guelfoweb/knock
 git clone https://github.com/danielmiessler/SecLists.git
 knockpy domain.com -w subdomains-top1mil-110000.txt
 ```
 
-* Using Google Dorks
+* 使用Google高级搜索功能
 ```bash
 site:*.domain.com -www
 site:http://domain.com filetype:pdf
@@ -24,14 +24,14 @@ site:http://domain.com inurl:login,register,upload,logout,redirect,redir,goto,ad
 site:http://domain.com ext:php,asp,aspx,jsp,jspa,txt,swf
 ```
 
-* Subdomain take over using HostileSubBruteForcer
+* 使用HostileSubBruteForcer
 ```bash
 git clone https://github.com/nahamsec/HostileSubBruteforcer
 chmox +x sub_brute.rb
 ./sub_brute.rb
 ```
 
-* EyeWitness and Nmap scans from the KnockPy and enumall scans
+* 源自KnockPy和enumall scans的EyeWitness and Nmap扫描
 ```bash
 git clone https://github.com/ChrisTruncer/EyeWitness.git
 ./setup/setup.sh
@@ -41,22 +41,22 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 ./EyeWitness -f rdp.txt --rdp
 ```
 
-## Passive recon
-* Using Shodan (https://www.shodan.io/) to detect similar app
+## 被动侦查
+* 使用Shodan (https://www.shodan.io/) 来识别类似的app
 
-* Using The Wayback Machine (https://archive.org/web/) to detect forgotten endpoints,
+* 使用Wayback Machine (https://archive.org/web/) 来检测被遗忘的节点,
   ```
   look for JS files, old links
   ```
 
-* Using The Harvester (https://github.com/laramies/theHarvester)
+* 使用Harvester (https://github.com/laramies/theHarvester)
   ```
   python theHarvester.py -b all -d domain.com
   ```
 
 
-## Active recon
-* Basic NMAP
+## 主动侦查
+* NMAP基础用法
   ```bash
   sudo nmap -sSV -p- 192.168.0.1 -oA OUTPUTFILE -T4
   sudo nmap -sSV -oA OUTPUTFILE -T4 -iL INPUTFILE.csv
@@ -68,26 +68,26 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
   • -iL INPUTFILE tells Nmap to use the provided file as inputs
   ```
 
-* Aggressive NMAP
+* 入侵式NMAP
   ```bash
   nmap -A -T4 scanme.nmap.org
   • -A: Enable OS detection, version detection, script scanning, and traceroute
   • -T4: Defines the timing for the task (options are 0-5 and higher is faster)
   ```
 
-* NMAP and add-ons
-  1. Using searchsploit to detect vulnerable services
-  ```bash
+* NMAP和扩展
+  1. 使用searchsploit 来检测漏洞服务
+  ```bash
   nmap -p- -sV -oX a.xml IP_ADDRESS; searchsploit --nmap a.xml
   ```
-  2. Generating nice scan report
+  2. 生成有用的扫描报告
   ```bash
   nmap -sV IP_ADDRESS -oX scan.xml && xsltproc scan.xml -o "`date +%m%d%y`_report.html"
   ```
 
 
-* NMAP Scripts
-  ```bash
+* NMAP脚本
+  ```bash
   nmap -sC : equivalent to --script=default
 
   nmap --script 'http-enum' -v web.xxxx.com -p80 -oN http-enum.nmap
@@ -157,9 +157,9 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 
   ```  
 
-## List all the subdirectories and files
+## 列出所有的子目录和文件
 
-* Using BFAC (Backup File Artifacts Checker): An automated tool that checks for backup artifacts that may disclose the web-application's source code.
+* 使用备份历史文件检测器(Backup File Artifacts Checker): 一个检查（可能暴露站点源码）备份历史文件的自动化扫描器 
 ```bash
 git clone https://github.com/mazen160/bfac
 
@@ -170,7 +170,7 @@ Check a list of URLs
 bfac --list testing_list.txt
 ```
 
-* Using DirBuster or GoBuster
+* 使用 DirBuster 或者 GoBuster
 ```bash
 ./gobuster -u http://buffered.io/ -w words.txt -t 10
 -u url
@@ -183,7 +183,7 @@ More subdomain :
 gobuster -w wordlist -u URL -r -e
 ```
 
-* Using Sublist3r
+*使用 Sublist3r
 ```bash
 To enumerate subdomains of specific domain and show the results in realtime:
 python sublist3r.py -v -d example.com
@@ -197,32 +197,32 @@ python sublist3r.py -e google,yahoo,virustotal -d example.com
 python sublist3r.py -b -d example.com
 ```
 
-* Using a script to detect all phpinfo.php files in a range of IPs (CIDR can be found with a whois)
+* 使用脚本来检测所有在一个ip段的phpinfo.php文件
 ```bash
 #!/bin/bash
 for ipa in 98.13{6..9}.{0..255}.{0..255}; do
 wget -t 1 -T 3 http://${ipa}/phpinfo.php; done &
 ```
 
-* Using a script to detect all .htpasswd files in a range of IPs
+* 使用脚本来检测所有在一个ip段的.htpasswd文件
 ```bash
 #!/bin/bash
 for ipa in 98.13{6..9}.{0..255}.{0..255}; do
 wget -t 1 -T 3 http://${ipa}/.htpasswd; done &
 ```
 
-## Looking for Web vulnerabilities
+## 寻找Web漏洞
 
-* Look for private information in GitHub repos with GitRob
+* 使用GitRob寻找在GitHub repos中的私人信息
 ```
 git clone https://github.com/michenriksen/gitrob.git
 gitrob analyze johndoe --site=https://github.acme.com --endpoint=https://github.acme.com/api/v3 --access-tokens=token1,token2
 ```
 
-* Explore the website with a proxy (ZAP/Burp Suite)
- 1. Start proxy, visit the main target site and perform a Forced Browse to discover files and directories
- 2. Map technologies used with Wappalyzer and Burp Suite (or ZAP) proxy
- 3. Explore and understand available functionality, noting areas that correspond to vulnerability types
+* 使用代理 (ZAP/Burp Suite)探索站点
+ 1. 开启代理, 访问目标站点并进行强制浏览来发现文件和目录
+ 2. Wappalyzer and Burp Suite (或者 ZAP)代理采用的Map技术
+ 3. 浏览并理解可获取的功能, 着重注意与漏洞类型相关的区域。
 ```bash
 Burp Proxy configuration on port 8080 (in .bashrc):
 alias set_proxy_burp='gsettings set org.gnome.system.proxy.http host "http://localhost";gsettings set org.gnome.system.proxy.http port 8080;gsettings set org.gnome.system.proxy mode "manual"'
@@ -231,7 +231,7 @@ alias set_proxy_normal='gsettings set org.gnome.system.proxy mode "none"'
 then launch Burp with : java -jar burpsuite_free_v*.jar &
 ```
 
-* Checklist for Web vulns
+* Web漏洞的检查列表
 ```
 [] AWS Amazon Bucket S3  
 [] Git Svn insecure files   
@@ -252,12 +252,12 @@ then launch Burp with : java -jar burpsuite_free_v*.jar &
 ...   
 ```
 
-* Subscribe to the site and pay for the additional functionality to test
+* 订阅这个站点并支付额外测试功能
 
-* Launch a Nikto scan in case you missed something
+* 启动Nikto扫描防止你错过了一些东西
 ```
 nikto -h http://domain.example.com
 ```
 
-## Thanks to
+## 感谢
 * http://blog.it-securityguard.com/bugbounty-yahoo-phpinfo-php-disclosure-2/
