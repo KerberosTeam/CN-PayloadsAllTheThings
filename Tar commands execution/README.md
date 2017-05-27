@@ -7,7 +7,7 @@
 ```
 --checkpoint=1
 --checkpoint-action=exec=sh shell.sh
-shell.sh   (your exploit code is here)
+shell.sh   (写有你的exp代码)
 ```
 
 ## 感谢
