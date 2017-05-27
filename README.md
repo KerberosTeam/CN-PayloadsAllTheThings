@@ -54,7 +54,7 @@ I <3 pull requests :)
 * [The Mobile Application Hackers Handbook by Dominic Chell et al., 2015](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118958500.html)
 * [Car Hacker's Handbook by Craig Smith, 2016](https://www.nostarch.com/carhacking)
 
-Blogs/Websites
+博客/网站
 * http://blog.zsec.uk/101-web-testing-tooling/
 * https://blog.innerht.ml
 * https://blog.zsec.uk
@@ -67,7 +67,7 @@ Youtube
 * [BSidesSF 101 The Tales of a Bug Bounty Hunter - Arne Swinnen](https://www.youtube.com/watch?v=dsekKYNLBbc)
 * [Security Fest 2016 The Secret life of a Bug Bounty Hunter - Frans Rosén](https://www.youtube.com/watch?v=KDo68Laayh8)
 
-Practice
+练习
 * [Root-Me](https://www.root-me.org)
 * [Zenk-Security](https://www.zenk-security.com/epreuves.php)
 * [W3Challs](https://w3challs.com/)
@@ -80,7 +80,7 @@ Practice
 * [HackThisSite](https://hackthissite.org)
 * [PentesterLab : Learn Web Penetration Testing: The Right Way](https://pentesterlab.com/)
 
-Bug Bounty
+漏洞奖金
 * [HackerOne](https://hackerone.com)
 * [BugCrowd](https://bugcrowd.com)
 * [Bounty Factory](https://bountyfactory.io)
