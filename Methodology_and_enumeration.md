@@ -259,5 +259,7 @@ then launch Burp with : java -jar burpsuite_free_v*.jar &
 nikto -h http://domain.example.com
 ```
 
-## 感谢
+## 致谢
 * http://blog.it-securityguard.com/bugbounty-yahoo-phpinfo-php-disclosure-2/
+
+

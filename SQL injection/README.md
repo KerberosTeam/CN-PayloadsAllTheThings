@@ -295,7 +295,7 @@ mysql> mysql> select version();
 
 
 
-## 感谢 - 其他资源
+## 致谢 - 其他资源
 * MySQL:
   - [PentestMonkey's mySQL injection cheat sheet] (http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet)
   - [Reiners mySQL injection Filter Evasion Cheatsheet] (https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/)
@@ -317,3 +317,5 @@ mysql> mysql> select version();
   - [Ruby on Rails (Active Record) SQL Injection Guide] (http://rails-sqli.org/)
   - [ForkBombers SQLMap Tamper Scripts Update](http://www.forkbombers.com/2016/07/sqlmap-tamper-scripts-update.html)
   - [SQLi in INSERT worse than SELECT](https://labs.detectify.com/2017/02/14/sqli-in-insert-worse-than-select/)
+
+

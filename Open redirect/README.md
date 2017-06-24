@@ -64,6 +64,8 @@ http://www.example.com/redirect.php?url=javascript:prompt(1)
 ```
 
 
-## 感谢
+## 致谢
 * filedescriptor
 * https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet
+
+

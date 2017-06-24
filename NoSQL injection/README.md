@@ -46,7 +46,9 @@ db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emi
 ```
 
 
-## 感谢
+## 致谢
 * https://www.dailysecurity.fr/nosql-injections-classique-blind/
 * https://www.owasp.org/index.php/Testing_for_NoSQL_injection
 * https://github.com/cr0hn/nosqlinjection_wordlists
+
+

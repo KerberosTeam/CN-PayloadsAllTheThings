@@ -21,6 +21,8 @@ var_dump('0xABCdef'       == '     0xABCdef');
 | SHA1 | 10932435112                | 0e07766915004133176347055865026311692244      | 由Michael A. Cleverly & Michele Spagnuolo & Rogdham独立创造 |
 
 
-## 感谢
+## 致谢
 * http://turbochaos.blogspot.com/2013/08/exploiting-exotic-bugs-php-type-juggling.html
 * https://www.whitehatsec.com/blog/magic-hashes/
+
+

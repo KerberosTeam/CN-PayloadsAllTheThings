@@ -562,7 +562,7 @@ Exotic payloads
 ```
 
 
-## 感谢
+## 致谢
 * https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot
 * tbm
 * http://infinite8security.blogspot.com/2016/02/welcome-readers-as-i-promised-this-post.html
@@ -571,3 +571,5 @@ Exotic payloads
 * http://support.detectify.com/customer/portal/articles/2088351-relative-path-overwrite
 * http://d3adend.org/xss/ghettoBypass
 * http://blog.portswigger.net/2016/01/xss-without-html-client-side-template.html
+
+

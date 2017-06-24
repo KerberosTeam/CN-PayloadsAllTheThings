@@ -35,8 +35,10 @@ If an authorization code is used more than once, the authorization server MUST d
 and SHOULD revoke (when possible) all tokens previously issued based on that authorization code.
 ```
 
-## 感谢
+## 致谢
 * http://blog.intothesymmetry.com/2016/11/all-your-paypal-tokens-belong-to-me.html
 * http://homakov.blogspot.ch/2014/02/how-i-hacked-github-again.html
 * http://intothesymmetry.blogspot.ch/2014/04/oauth-2-how-i-have-hacked-facebook.html
 * http://andrisatteka.blogspot.ch/2014/09/how-microsoft-is-giving-your-data-to.html
+
+
