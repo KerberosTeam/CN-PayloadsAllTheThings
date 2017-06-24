@@ -1,11 +1,11 @@
 # Amazon Bucket S3 AWS
-By default the name of Amazon Bucket are
+默认的Amazon Bucket名字是
 ```
 http://s3.amazonaws.com/[bucket_name]/
 http://[bucket_name].s3.amazonaws.com/
 ```
 
-Move a file into the bucket
+将一个文件移动到bucket中
 ```
 sudo apt install awscli
 
@@ -18,7 +18,7 @@ SUCCESS : "move: ./test.txt to s3://hackerone.files/test.txt"
 ```
 
 Bucket Finder
-A cool tool that will search for readable buckets and list all the files in them. It can also be used to quickly find buckets that exist but deny access to listing files.
+一个很棒的工具，可以用来查找可读的bucket，并且列出这些bucket里面的所有文件。它也可以用来找到那些存在的，但是拒绝列出文件请求的bucket。
 ```
 wget https://digi.ninja/files/bucket_finder_1.1.tar.bz2 -O bucket_finder_1.1.tar.bz2
 ./bucket_finder.rb my_words
@@ -32,13 +32,13 @@ wget https://digi.ninja/files/bucket_finder_1.1.tar.bz2 -O bucket_finder_1.1.tar
 ./bucket_finder.rb --download --region ie my_words
 ./bucket_finder.rb --log-file bucket.out my_words
 ```
-Use a custom wordlist for the bucket finder, can be created with
+对bucket finder使用自定义列表，可以通过以下方式创建：
 ```
 List of Fortune1000 company names with permutations on .com, -backup, -media. For example, walmart becomes walmart, walmart.com, walmart-backup, walmart-media.
 List of the top Alexa 100,000 sites with permutations on the TLD and www. For example, walmart.com becomes www.walmart.com, www.walmart.net, walmart.com, and walmart.
 ```
 
 
-## Thanks to
+## 致谢
 * https://community.rapid7.com/community/infosec/blog/2013/03/27/1951-open-s3-buckets
 * https://digi.ninja/projects/bucket_finder.php
