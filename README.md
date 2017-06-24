@@ -35,7 +35,7 @@ I <3 pull requests :)
 * `docker pull bkimminich/juice-shop` - [OWASP Juice Shop](https://github.com/bkimminich/juice-shop#docker-container)
 
 # 更多资源
-书单:
+书单：
 * [Web Hacking 101](https://leanpub.com/web-hacking-101)
 * [OWASP Testing Guide v4](https://www.owasp.org/index.php/OWASP_Testing_Project)
 * [Penetration Testing: A Hands-On Introduction to Hacking](http://amzn.to/2dhHTSn)

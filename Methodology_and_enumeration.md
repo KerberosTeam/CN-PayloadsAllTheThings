@@ -1,21 +1,21 @@
-# 寻找漏洞的方法和列表
+# 漏洞搜寻方式和枚举
 
-## 枚举所有子域名 (只针对*.domain.ext有效)
+## 列举所有的子域 (只有当范围是 *.domain.ext)
 
-* 使用子域名爆破
+* 使用子域名爆破工具
 ```bash
 git clone https://github.com/TheRook/subbrute
 python subbrute.py domain.example.com
 ```
 
-* 使用带有Daniel Miessler的SecLists（"/Discover/DNS"子域名）的KnockPy 
+* Using KnockPy with Daniel Miessler’s SecLists for subdomain "/Discover/DNS"
 ```bash
 git clone https://github.com/guelfoweb/knock
 git clone https://github.com/danielmiessler/SecLists.git
 knockpy domain.com -w subdomains-top1mil-110000.txt
 ```
 
-* 使用Google高级搜索功能
+* Using Google Dorks
 ```bash
 site:*.domain.com -www
 site:http://domain.com filetype:pdf
@@ -24,14 +24,14 @@ site:http://domain.com inurl:login,register,upload,logout,redirect,redir,goto,ad
 site:http://domain.com ext:php,asp,aspx,jsp,jspa,txt,swf
 ```
 
-* 使用HostileSubBruteForcer
+* Subdomain take over using HostileSubBruteForcer
 ```bash
 git clone https://github.com/nahamsec/HostileSubBruteforcer
 chmox +x sub_brute.rb
 ./sub_brute.rb
 ```
 
-* 源自KnockPy和enumall scans的EyeWitness and Nmap扫描
+* EyeWitness and Nmap scans from the KnockPy and enumall scans
 ```bash
 git clone https://github.com/ChrisTruncer/EyeWitness.git
 ./setup/setup.sh
@@ -41,22 +41,22 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 ./EyeWitness -f rdp.txt --rdp
 ```
 
-## 被动侦查
-* 使用Shodan (https://www.shodan.io/) 来识别类似的app
+## 被动侦察
+* 使用 Shodan (https://www.shodan.io/) 来探测相似的应用程序
 
-* 使用Wayback Machine (https://archive.org/web/) 来检测被遗忘的节点,
+* 使用 The Wayback Machine (https://archive.org/web/) 来探测被遗忘的端点,
   ```
   look for JS files, old links
   ```
 
-* 使用Harvester (https://github.com/laramies/theHarvester)
+* 使用 The Harvester (https://github.com/laramies/theHarvester)
   ```
   python theHarvester.py -b all -d domain.com
   ```
 
 
-## 主动侦查
-* NMAP基础用法
+## 主动侦察
+* Basic NMAP
   ```bash
   sudo nmap -sSV -p- 192.168.0.1 -oA OUTPUTFILE -T4
   sudo nmap -sSV -oA OUTPUTFILE -T4 -iL INPUTFILE.csv
@@ -68,26 +68,26 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
   • -iL INPUTFILE tells Nmap to use the provided file as inputs
   ```
 
-* 入侵式NMAP
+* Aggressive NMAP
   ```bash
   nmap -A -T4 scanme.nmap.org
   • -A: Enable OS detection, version detection, script scanning, and traceroute
   • -T4: Defines the timing for the task (options are 0-5 and higher is faster)
   ```
 
-* NMAP和扩展
-  1. 使用searchsploit 来检测漏洞服务
+* NMAP and add-ons
+  1. 使用 searchsploit 来探测易受攻击的服务器
   ```bash
   nmap -p- -sV -oX a.xml IP_ADDRESS; searchsploit --nmap a.xml
   ```
-  2. 生成有用的扫描报告
-  ```bash
+  2. 合成精密的扫描报告
+  ```bash
   nmap -sV IP_ADDRESS -oX scan.xml && xsltproc scan.xml -o "`date +%m%d%y`_report.html"
   ```
 
 
-* NMAP脚本
-  ```bash
+* NMAP Scripts
+  ```bash
   nmap -sC : equivalent to --script=default
 
   nmap --script 'http-enum' -v web.xxxx.com -p80 -oN http-enum.nmap
@@ -157,9 +157,9 @@ git clone https://github.com/ChrisTruncer/EyeWitness.git
 
   ```  
 
-## 列出所有的子目录和文件
+## 列举出所有的子目录和文档
 
-* 使用备份历史文件检测器(Backup File Artifacts Checker): 一个检查（可能暴露站点源码）备份历史文件的自动化扫描器 
+* 使用 BFAC (Backup File Artifacts Checker): 一个自动化的可以检测是否有能够揭露网页应用程序源代码备份工件的工具 .
 ```bash
 git clone https://github.com/mazen160/bfac
 
@@ -170,7 +170,7 @@ Check a list of URLs
 bfac --list testing_list.txt
 ```
 
-* 使用 DirBuster 或者 GoBuster
+* Using DirBuster or GoBuster
 ```bash
 ./gobuster -u http://buffered.io/ -w words.txt -t 10
 -u url
@@ -183,7 +183,7 @@ More subdomain :
 gobuster -w wordlist -u URL -r -e
 ```
 
-*使用 Sublist3r
+* Using Sublist3r
 ```bash
 To enumerate subdomains of specific domain and show the results in realtime:
 python sublist3r.py -v -d example.com
@@ -197,32 +197,32 @@ python sublist3r.py -e google,yahoo,virustotal -d example.com
 python sublist3r.py -b -d example.com
 ```
 
-* 使用脚本来检测所有在一个ip段的phpinfo.php文件
+* 使用一个脚本在IPs (CIDR can be found with a whois)系列里探测 phpinfo.php 文档
 ```bash
 #!/bin/bash
 for ipa in 98.13{6..9}.{0..255}.{0..255}; do
 wget -t 1 -T 3 http://${ipa}/phpinfo.php; done &
 ```
 
-* 使用脚本来检测所有在一个ip段的.htpasswd文件
+* 使用一个脚本在一系列IPs里探测所有的 .htpasswd 文档
 ```bash
 #!/bin/bash
 for ipa in 98.13{6..9}.{0..255}.{0..255}; do
 wget -t 1 -T 3 http://${ipa}/.htpasswd; done &
 ```
 
-## 寻找Web漏洞
+## 寻找网页的弱点
 
-* 使用GitRob寻找在GitHub repos中的私人信息
+* 用GitRob在GitHub repos寻找私人信息
 ```
 git clone https://github.com/michenriksen/gitrob.git
 gitrob analyze johndoe --site=https://github.acme.com --endpoint=https://github.acme.com/api/v3 --access-tokens=token1,token2
 ```
 
-* 使用代理 (ZAP/Burp Suite)探索站点
- 1. 开启代理, 访问目标站点并进行强制浏览来发现文件和目录
- 2. Wappalyzer and Burp Suite (或者 ZAP)代理采用的Map技术
- 3. 浏览并理解可获取的功能, 着重注意与漏洞类型相关的区域。
+* 用一个代理 (ZAP/Burp Suite)来浏览网站
+ 1. 启动代理，访问目标站点并且强制打开浏览器来发现文档和目录
+ 2. 映射出使用 Wappalyzer and Burp Suite (or ZAP) 代理的技术
+ 3.探索和理解可用的功能，注解出符合漏洞类型的范围
 ```bash
 Burp Proxy configuration on port 8080 (in .bashrc):
 alias set_proxy_burp='gsettings set org.gnome.system.proxy.http host "http://localhost";gsettings set org.gnome.system.proxy.http port 8080;gsettings set org.gnome.system.proxy mode "manual"'
@@ -231,7 +231,7 @@ alias set_proxy_normal='gsettings set org.gnome.system.proxy mode "none"'
 then launch Burp with : java -jar burpsuite_free_v*.jar &
 ```
 
-* Web漏洞的检查列表
+* Checklist for Web vulns
 ```
 [] AWS Amazon Bucket S3  
 [] Git Svn insecure files   
@@ -252,9 +252,9 @@ then launch Burp with : java -jar burpsuite_free_v*.jar &
 ...   
 ```
 
-* 订阅这个站点并支付额外测试功能
+* 订阅该网站并且支付额外的功能来测试 
 
-* 启动Nikto扫描防止你错过了一些东西
+* 发起 Nikto 扫描以防你遗漏了一些东西
 ```
 nikto -h http://domain.example.com
 ```

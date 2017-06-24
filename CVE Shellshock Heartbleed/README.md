@@ -1,13 +1,12 @@
-# Common Vulnerabilities and Exposures
-Big CVEs in the last 5 years.	
+# 公共漏洞与披露
+过去5年里影响较大的CVE。
 
 ## Heartbleed
-The Heartbleed Bug is a serious vulnerability in the popular OpenSSL cryptographic software library. This weakness allows stealing the information protected, under normal conditions, by the SSL/TLS encryption used to secure the Internet. SSL/TLS provides communication security and privacy over the Internet for applications such as web, email, instant messaging (IM) and some virtual private networks (VPNs).
+Heartbleed Bug是流行的OpenSSL加密软件库中的严重漏洞。该弱点允许在正常情况下通过用于保护Internet的SSL/TLS加密来窃取受保护的信息。SSL/TLS通过互联网为如网络，电子邮件，即时消息（IM）和一些虚拟专用网络（VPN）等应用程序提供安全和隐私。
 
 ## Shellshock
-Shellshock, also known as Bashdoor is a family of security bug in the widely used Unix Bash shell, the first of which was disclosed on 24 September 2014. Many Internet-facing services, such as some web server deployments, use Bash to process certain requests, allowing an attacker to cause vulnerable versions of Bash to execute arbitrary commands. This can allow an attacker to gain unauthorized access to a computer system.
+Shellshock也被称为Bashdoor，是广泛使用的Unix Bash shell中的一个安全漏洞系列，在2014年9月24日被第一次披露。许多面向Internet的服务（如某些Web服务器部署服务），使用Bash来处理特定请求，允许攻击者造成易受攻击的Bash版本执行任意命令。这允许攻击者访问未经授权的计算机系统。
 
-
-## Thanks to
+## 感谢
 * http://heartbleed.com
 * https://en.wikipedia.org/wiki/Shellshock_(software_bug)

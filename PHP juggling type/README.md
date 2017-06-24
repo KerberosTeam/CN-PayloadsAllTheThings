@@ -1,6 +1,6 @@
 # PHP Juggling type and magic hashes	
 
-## Exploit
+## 开发
 
 ```php
 <?php
@@ -15,12 +15,12 @@ var_dump('0xABCdef'       == '     0xABCdef');
 ```
 
 
-| Hash | “Magic” Number / String    | Magic Hash                                    | Found By      |
+| Hash | “Magic” 数字 / 字符串       | Magic Hash                                    | 创建者      |
 | ---- | -------------------------- |:---------------------------------------------:| -------------:|
 | MD5  | 240610708                  | 0e462097431906509019562988736854              | Michal Spacek |
-| SHA1 | 10932435112                | 0e07766915004133176347055865026311692244      | Independently found by Michael A. Cleverly & Michele Spagnuolo & Rogdham |
+| SHA1 | 10932435112                | 0e07766915004133176347055865026311692244      | 由Michael A. Cleverly & Michele Spagnuolo & Rogdham独立创造 |
 
 
-## Thanks to
+## 感谢
 * http://turbochaos.blogspot.com/2013/08/exploiting-exotic-bugs-php-type-juggling.html
 * https://www.whitehatsec.com/blog/magic-hashes/
