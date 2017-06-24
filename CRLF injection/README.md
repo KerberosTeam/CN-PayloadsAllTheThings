@@ -84,6 +84,8 @@ Content-Length: 34
 
 
 
-## 感谢
+## 致谢
 * https://www.owasp.org/index.php/CRLF_Injection
 * https://vulners.com/hackerone/H1:192749
+
+

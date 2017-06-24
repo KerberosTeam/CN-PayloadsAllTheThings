@@ -23,7 +23,9 @@ cmd is the name the server can respond to whenever a client is trying to access 
 @
 ```
 
-## 感谢
+## 致谢
 * https://owasp.org/index.php/CSV_Excel_Macro_Injection
 * https://sites.google.com/site/bughunteruniversity/nonvuln/csv-excel-formula-injection
 * https://www.contextis.com/resources/blog/comma-separated-vulnerabilities/
+
+
