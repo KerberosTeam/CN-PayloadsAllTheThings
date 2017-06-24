@@ -9,9 +9,13 @@
 ### Git Svn insecure files
 - README.md Erin
 ### NoSQL injection
+- README.md Aimee
 ### OAuth
+- README.md Aimee
 ### Open redirect
+- README.md Aimee
 ### PHP include
+- README.md Aimee
 ### PHP juggling type
 - README.md 参商如嚅
 ### PHP serialization
